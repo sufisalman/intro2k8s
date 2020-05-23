@@ -1,5 +1,5 @@
-##Task: {Deploy and run a Java microservice Web API backed by in-memory database}
-##Success Criteria: {Successful display of rest end points in Swagger UI} 
+Task: {Deploy a microservice Web API with mySQL backend}
+Success Criteria: {Successful display of rest end points in Swagger UI} 
 
 - Build & Run: ```mvn spring-boot:run```
 - Open API Access: http://127.0.0.1:8080/telemetry/api/v1/swagger-ui.html
