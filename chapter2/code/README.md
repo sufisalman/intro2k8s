@@ -13,20 +13,14 @@ Successful access to application rest end points running in a docker container f
 
 ```mvn clean package```
 
-2. Create "Dockerfile" file in project root folder with following entries:
+2. Using a text editor, create "Dockerfile" file in project root folder with following entries:
 
 ```
-
 FROM adoptopenjdk/openjdk11-openj9:latest
-
 COPY ./target/telemetry-0.0.1-SNAPSHOT.jar /usr/app/
-
 WORKDIR /usr/app
-
 EXPOSE 8080
-
 ENTRYPOINT ["java", "-jar", "telemetry-0.0.1-SNAPSHOT.jar"]
-
 ```
 
 
