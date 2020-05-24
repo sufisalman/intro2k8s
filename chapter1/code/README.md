@@ -1,8 +1,15 @@
 ##Task: {Deploy and run a Java microservice Web API backed by in-memory database}
 ##Success Criteria: {Successful display of rest end points in Swagger UI} 
 
-- Build & Run: ```mvn spring-boot:run```
-- Open API Access: http://127.0.0.1:8080/telemetry/api/v1/swagger-ui.html
-- H2-Database Access:  http://127.0.0.1:8080/telemetry/api/v1/h2-console
-- Sample URI for simple JSON media: http://127.0.0.1:8080/telemetry/api/v1/locations
-- Sample URI for HAL+JSON media: http://127.0.0.1:8080/telemetry/api/v1/hal/locations
+1. Build & run application:
+```mvn spring-boot:run```
+
+2. Access web application using a browser on the same node:
+
+- http://127.0.0.1:3333/telemetry/api/v1/swagger-ui.html	(API docs and test client)
+- http://127.0.0.1:3333/telemetry/api/v1/locations 		(simple json RPC response)
+- http://127.0.0.1:3333/telemetry/api/v1/hal/locations 		(hal+json response)
+- http://127.0.0.1:3333/telemetry/api/v1/h2-console		(H2 database) [Username:sa, Password: ]
+- http://127.0.0.1:3333/telemetry/api/v1			(HAL Browser)
+
+3. Done!
