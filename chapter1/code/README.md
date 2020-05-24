@@ -1,7 +1,8 @@
-##Task: {Deploy and run a Java microservice Web API backed by in-memory database}
-##Success Criteria: {Successful display of rest end points in Swagger UI} 
+## Task: {Deploy and run a Java microservice Web API backed by in-memory database}
+## Success Criteria: {Successful display of rest end points in Swagger UI} 
 
 1. Build & run application:
+
 ```mvn spring-boot:run```
 
 2. Access web application using a browser on the same node:
