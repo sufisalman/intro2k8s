@@ -1,5 +1,13 @@
-## Task: {Deploy and run a Java microservice Web API backed by in-memory database}
-## Success Criteria: {Successful display of rest end points in Swagger UI} 
+## Task:
+
+Deploy and run a Java microservice Web API backed by in-memory database}
+
+## Success Criteria:
+
+Successful display application service end points in the browser.
+
+## Steps:
+
 
 1. Build & run application:
 

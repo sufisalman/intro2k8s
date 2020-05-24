@@ -1,5 +1,13 @@
-## Task: {Containerize a Java Microservice Web API}
-## Success Criteria: {Successful access rest end points running in a docker container from the host node brwoser } 
+## Task:
+
+Containerize a Java microservice web API application.
+
+## Success Criteria:
+
+Successful access to application rest end points running in a docker container from the host node browser.
+
+## Steps:
+
 
 1.  Build application:
 
