@@ -48,5 +48,11 @@ ENTRYPOINT ["java", "-jar", "telemetry-0.0.1-SNAPSHOT.jar"]
 - http://127.0.0.1:3333/telemetry/api/v1/h2-console		(H2 database) [Username:sa, Password: ]
 - http://127.0.0.1:3333/telemetry/api/v1			(HAL Browser)
 
-8. Done!
+8. Stop container:
+```docker stop <container-id>```
+ 
 
+10. Delete docker image:
+```docker image rm <image-id>```
+
+11. Done!

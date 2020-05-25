@@ -1,0 +1,4 @@
+1- Deploy a mysql container
+2- Connect application container with mysql container
+3- Ephmeral nature of containers!!
+
