@@ -21,7 +21,7 @@ docker run -p 3306:3306 --name labuser-mysql -e MYSQL_ROOT_PASSWORD=password -d 
 
 docker inspect labuser-mysql | grep IPAddress
 ```
-Note IPAddress value: (172.X.X.X)
+**Note IPAddress value: (172.X.X.X)**
 
 
 2. Inspect mysql container:
@@ -42,7 +42,7 @@ docker exec -it labuser-mysql bash
 3. Change "application.properties" entries in microservice app to point to mySQL. Comment out H2 entries and enable mysql ones.
 
 ```
-spring.datasource.url=jdbc:mysql://{mysql-container-IPAddress}:3306/telemetrydb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+spring.datasource.url=jdbc:mysql://**{mysql-container-IPAddress}**:3306/telemetrydb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
 ```
 
 4.  Build application:
