@@ -31,7 +31,7 @@ docker exec -it labuser-mysql bash
 
 <@container-shell> mysql -p
 
-*(Password= password)*
+_(Password= password)_
 
 <@mysql-shell> SHOW DATABASES;
 
@@ -77,7 +77,7 @@ ENTRYPOINT ["java", "-jar", "telemetry-0.0.1-SNAPSHOT.jar"]
 
 ```docker ps -l```
 
-*(both app and db container should be up and running)*
+_(both app and db container should be up and running)_
 
 9. Access web app in browser:
 
