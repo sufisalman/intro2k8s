@@ -1,10 +1,10 @@
 ## Task:
 
-Containerize a Java microservice web API application.
+Deploy a containerized Java microservice web API app using a containerized MySQL database as the backend. 
 
 ## Success Criteria:
 
-Successful access to application rest end points running in a docker container from the host node browser.
+Successful test response from REST endpoints from a docker container app.
 
 ## Steps:
 
@@ -28,10 +28,14 @@ Note IPAddress value: (172.X.X.X)
 
 ```
 docker exec -it labuser-mysql bash
+
 <@container-shell> mysql -p
 (Password= password)
+
 <@mysql-shell> SHOW DATABASES;
+
 <@mysql-shell> exit
+
 <@container-shell> exit
 ```
 
@@ -81,12 +85,17 @@ ENTRYPOINT ["java", "-jar", "telemetry-0.0.1-SNAPSHOT.jar"]
 
 
 8. Stop containers:
-```docker stop labuser-mysql```
-```docker stop labuser-telemetry```
+```
+docker stop labuser-mysql
+
+docker stop labuser-telemetry
+```
  
 
 10. Delete docker images:
-```docker image rm -f mysql:latest```
-```docker image rm -f labuser/telemetry:latest```
+```
+docker image rm -f mysql:latest
+docker image rm -f labuser/telemetry:latest
+```
 
 11. Done!
