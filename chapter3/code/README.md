@@ -30,7 +30,8 @@ docker inspect labuser-mysql | grep IPAddress
 docker exec -it labuser-mysql bash
 
 <@container-shell> mysql -p
-(Password= password)
+
+*(Password= password)*
 
 <@mysql-shell> SHOW DATABASES;
 
@@ -75,7 +76,8 @@ ENTRYPOINT ["java", "-jar", "telemetry-0.0.1-SNAPSHOT.jar"]
 8. View running containers (in a different shell):
 
 ```docker ps -l```
-(both app and db container should be up and running)
+
+*(both app and db container should be up and running)*
 
 9. Access web app in browser:
 
@@ -96,6 +98,7 @@ docker stop labuser-telemetry
 10. Delete docker images:
 ```
 docker image rm -f mysql:latest
+
 docker image rm -f labuser/telemetry:latest
 ```
 
