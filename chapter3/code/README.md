@@ -17,7 +17,9 @@ docker pull mysql
 
 docker image ls mysql
 
-docker run -p 3306:3306 --name labuser-mysql -e MYSQL_ROOT_PASSWORD=password -d mysql
+docker tag mysql:latest labuser/mysql:latest
+
+docker run -p 3306:3306 --name labuser-mysql -e MYSQL_ROOT_PASSWORD=password -d labuser/mysql
 
 docker inspect labuser-mysql | grep IPAddress
 ```
@@ -97,7 +99,7 @@ docker stop labuser-telemetry
 
 10. Delete docker images:
 ```
-docker image rm -f mysql:latest
+docker image rm -f labuser/mysql:latest
 
 docker image rm -f labuser/telemetry:latest
 ```
