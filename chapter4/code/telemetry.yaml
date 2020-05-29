@@ -1,0 +1,152 @@
+#Set up namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: telemetry-dev
+--- 
+
+#PV is set up by ops
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+  namespace: telemetry-dev
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+    - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /data/telemetry-mysql
+---
+
+#PVC is a request by dev
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  namespace: telemetry-dev
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: ""
+---
+
+#Download, configure and run image
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  namespace: telemetry-dev
+spec:
+  selector:
+    #using this matchLabel value to attach deplyyment to the service (service-deployment connector)
+    matchLabels:
+      app: mysql  
+  replicas: 1
+  #pod template for mysql pod.
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: telemetry-mysql
+        image: "labuser/mysql:latest"
+        volumeMounts:
+        #defining the mount point handle (mydql-pd) for mysql data directory inside the container.
+        - name: mysql-pd
+          mountPath: /var/lib/mysql
+        ports:
+        - containerPort: 3306  
+         #Set env variables in K8s directly - No need to define in Dockerfile
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "password"
+        #ensure that local image is pulled first
+        imagePullPolicy: IfNotPresent
+      volumes:
+      #pass on the mount point handle (mysql-pd) to pvc (app-pvc)
+      - name: mysql-pd
+        persistentVolumeClaim:
+          claimName: mysql-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  #name of the db service to connect to wordpress app pods (appPods-dbService connector) 
+  name: mysql-service
+  namespace: telemetry-dev
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    #Use this selector to pick and attach with a deployment
+    app: mysql
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  namespace: telemetry-dev
+spec:
+  selector:
+    #using this matchLabel value to attach to service (service-deployment connector)
+    matchLabels:
+      app: app
+  # Set instances of app    
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  #this is basically the pod template
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: "telemetry-app"
+        image: "labuser/telemetry:latest"
+        ports:
+        - containerPort: 8080
+        #Set env variables in K8s directly - No need to define in Dockerfile
+        env:
+        - name: DB_HOST
+          #this value points to the name of mysql-service.
+          #these values are typically read from a secret config.
+          value: mysql-service
+        - name: DB_PORT
+          value: '3306'
+        - name: DB_NAME
+          value: "telemetrydb"
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASSWORD
+          value: "password"
+          #ensure that local image is pulled first
+        imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  namespace: telemetry-dev
+  labels:
+    app: app
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 30030
+  sessionAffinity: ClientIP
+  #using this selector to connect service to the deployment (service-deployment connector)
+  selector:
+    app: app
