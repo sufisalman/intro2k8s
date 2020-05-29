@@ -23,9 +23,9 @@ docker run -p 3306:3306 --name labuser-mysql -e MYSQL_ROOT_PASSWORD=password -d 
 
 docker inspect labuser/mysql | grep IPAddress
 
+```
 @Notethe value for IPAddress (172.17.0.X)
 
-```
 3. Change "application.properties" entries for "DB_HOST" in microservice app to point to mySQL. Needed for error free app build.
  
 ```
@@ -89,8 +89,8 @@ kubectl get pv --namespace=telemetry-dev
 12. Access app in browser:
 
 - http://127.0.0.1:30030/telemetry/api/v1/swagger-ui.html	(API docs and test client)
-- http://127.0.0.1:3333/telemetry/api/v1/locations 		(simple json RPC response)
-- http://127.0.0.1:3333/telemetry/api/v1/hal/locations 		(hal+json response)
+- http://127.0.0.1:30030/telemetry/api/v1/locations 		(simple json RPC response)
+- http://127.0.0.1:30030/telemetry/api/v1/hal/locations 	(hal+json response)
 			
 
 13. Delete K8s namespace (this should delete all resources within the namespace. PV is not bound to namespace.):
