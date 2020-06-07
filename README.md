@@ -18,8 +18,9 @@
 
 ## Notes:
 1. All code samples were developed on Ubuntu-18-LTS VM.
-2. A simple text editors like "gedit" was used.
+2. All work was done using OSS.
 3. minikube is set up with "driver=none" option.
+
 
 
 
