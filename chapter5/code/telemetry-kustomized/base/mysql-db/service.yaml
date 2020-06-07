@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  #name of the db service to connect to wordpress app pods (appPods-dbService connector) 
+  name: mysql-service
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    #Use this selector to pick and attach with a deployment
+    app: mysql

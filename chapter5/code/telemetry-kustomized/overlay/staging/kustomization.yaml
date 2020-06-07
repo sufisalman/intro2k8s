@@ -1,0 +1,19 @@
+namespace: telemetry-kustomized-staging
+nameSuffix: -staging
+resources:
+#include all resources from base
+- ../../base
+# override namespace
+- namespace.yaml
+commonLabels:
+  builder: kust
+  env: staging
+  rel: 0.0.1
+patchesStrategicMerge:
+- service-port.yaml
+- pv-path.yaml
+configMapGenerator:
+- name: configmap
+  envs:
+  - env.properties
+  behavior: replace

@@ -1,0 +1,22 @@
+#must align namesuffix value (-dev) with namespace value:(telemetry-kustomized-dev) - see namespace.yaml for more #details!
+##################################################################################################################
+nameSuffix: -dev
+namespace: telemetry-kustomized-dev
+resources:
+#include all resources from base
+- ../../base
+# override namespace
+- namespace.yaml
+commonLabels:
+  builder: kust
+  env: dev
+  rel: 0.0.1
+patchesStrategicMerge:
+- service-port.yaml
+- pv-path.yaml
+configMapGenerator:
+- name: configmap
+  envs:
+  - env.properties
+  behavior: replace
+

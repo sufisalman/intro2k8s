@@ -1,0 +1,42 @@
+#Download, configure and run image
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  #namespace: telemetry-dev
+spec:
+  selector:
+    #using this matchLabel value to attach deplyyment to the service (service-deployment connector)
+    matchLabels:
+      app: mysql  
+  replicas: 1
+  #pod template for mysql pod.
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: telemetry-mysql
+        image: "labuser/mysql:latest"
+        volumeMounts:
+        #defining the mount point handle (mydql-pd) for mysql data directory inside the container.
+        - name: mysql-pd
+          mountPath: /var/lib/mysql
+        ports:
+        - containerPort: 3306  
+         #Set env variables in K8s directly - No need to define in Dockerfile
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          #value: "password"
+          valueFrom:
+            configMapKeyRef:
+              name: configmap
+              key: service.database.password
+        #ensure that local image is pulled first
+        imagePullPolicy: IfNotPresent
+      volumes:
+      #pass on the mount point handle (mysql-pd) to pvc (app-pvc)
+      - name: mysql-pd
+        persistentVolumeClaim:
+          claimName: mysql-pvc

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  #namespace: telemetry
+  labels:
+    app: app
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 30030
+  sessionAffinity: ClientIP
+  #using this selector to connect service to the deployment (service-deployment connector)
+  selector:
+    app: app

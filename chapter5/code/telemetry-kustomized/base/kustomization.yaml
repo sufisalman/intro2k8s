@@ -1,0 +1,11 @@
+resources:
+#set app directories as base resources
+- telemetry-app
+- mysql-db
+#base resource manifests
+#- secret.yaml
+configMapGenerator:
+- name: configmap
+  envs:
+  - env.properties
+  
