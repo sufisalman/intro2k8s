@@ -45,16 +45,34 @@ kustomize build ./telemetry-kustomized/overlay/staging | kubectl apply -f -
 kustomize build ./telemetry-kustomized/overlay/production | kubectl apply -f -
 ```
 
-7. Fireup K8s dashboard and confirm that all 3 environments are up and running:
+7. Fireup K8s dashboard and confirm that all 3 environments are up and running (check namespaces):
 ```
 sudo minikube dashboard
 ```
 
-8. Stop minikube cluster:
+8. Access dev, staging and production versions of the solution:
+
+dev:
+```
+http://127.0.0.1:30030/telemetry/api/v1/swagger-ui.html	(API docs and test client)
+```
+
+staging:
+```
+http://127.0.0.1:30031/telemetry/api/v1/swagger-ui.html	(API docs and test client)
+```
+
+production:
+```
+http://127.0.0.1:30032/telemetry/api/v1/swagger-ui.html	(API docs and test client)
+```
+
+
+9. Stop minikube cluster:
 ```
 sudo minikube stop
 ```
 
-9. Done! :-)
+10. Done! :-)
 
 

@@ -45,7 +45,7 @@ ENTRYPOINT ["java", "-jar", "telemetry-0.0.1-SNAPSHOT.jar"]
 - http://127.0.0.1:3333/telemetry/api/v1/swagger-ui.html	(API docs and test client)
 - http://127.0.0.1:3333/telemetry/api/v1/locations 		(simple json RPC response)
 - http://127.0.0.1:3333/telemetry/api/v1/hal/locations 		(hal+json response)
-- http://127.0.0.1:3333/telemetry/api/v1/h2-console		(H2 database) [Username:sa, Password: ]
+- http://127.0.0.1:3333/telemetry/api/v1/h2-console		(H2 database) [JDBC URL: jdbc:h2:mem:telemetrydb, Username: sa, Password:  ]
 - http://127.0.0.1:3333/telemetry/api/v1			(HAL Browser)
 
 8. Stop container:
@@ -53,6 +53,6 @@ ENTRYPOINT ["java", "-jar", "telemetry-0.0.1-SNAPSHOT.jar"]
  
 
 10. Delete docker image:
-```docker image rm <image-id>```
+```docker image rm -f <image-id>```
 
 11. Done!
