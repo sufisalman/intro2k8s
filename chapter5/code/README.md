@@ -54,17 +54,17 @@ sudo minikube dashboard
 
 dev:
 ```
-http://127.0.0.1:30030/telemetry/api/v1/swagger-ui.html	(API docs and test client)
+http://127.0.0.1:30030/telemetry/api/v1/swagger-ui.html
 ```
 
 staging:
 ```
-http://127.0.0.1:30031/telemetry/api/v1/swagger-ui.html	(API docs and test client)
+http://127.0.0.1:30031/telemetry/api/v1/swagger-ui.html
 ```
 
 production:
 ```
-http://127.0.0.1:30032/telemetry/api/v1/swagger-ui.html	(API docs and test client)
+http://127.0.0.1:30032/telemetry/api/v1/swagger-ui.html
 ```
 
 
