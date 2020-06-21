@@ -27,7 +27,7 @@ docker image tag mysql:latest labuser/mysql:latest
 
 docker run -p 3306:3306 --name labuser-mysql -e MYSQL_ROOT_PASSWORD=password -d labuser/mysql
 
-docker inspect labuser/mysql | grep IPAddress
+docker inspect labuser-mysql | grep IPAddress
 
 ```
 @Notethe value for IPAddress (172.17.0.X)
