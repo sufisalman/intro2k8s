@@ -8,7 +8,13 @@ Successful response from Web API REST endpoints running in a K8s cluster.
 
 ## Steps:
 
-1. Setup mysql docker container
+1. Remove all running containers:
+
+```
+docker container rm -f $(docker container ls -aq)
+```
+
+2. Setup mysql docker container:
 
 ```
 docker search mysql
@@ -46,36 +52,36 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "telemetry-0.0.1-SNAPSHOT.jar"]
 ```
 
-5. Build app the container image: 
+6. Build app container image: 
 
 ```docker build -t labuser/telemetry .```
 
-6. View image:
+7. View image:
 
 ```docker image ls```
 
-7. Remove all running containers:
+8. Remove all running containers (We will let K8s create containers later!):
 
 ```
-docker rm (@docker ps -qa)
+docker container rm -f $(docker container ls -aq)
 ```
 
-8. Start minikube cluster
+9. Start minikube cluster
 ```
 sudo minikube start
 ```
 
-9. Deploy solution to cluster:
+10. Deploy solution to cluster:
 ```
 kubectl apply -f telemetry.yaml
 ```
 
-10. Start K8s dashboard and view all configured resources in "telemetry-dev" namespace:
+11. Start K8s dashboard and view all configured resources in "telemetry-dev" namespace:
 ```
 sudo minikube dashboard
 ```
 
-11. View configured resources through cli:
+12. View configured resources through cli:
 ```
 kubectl get ns
 kubectl get pods --namespace=telemetry-dev
@@ -86,22 +92,22 @@ kubectl get pv --namespace=telemetry-dev
 ....
 ```
 
-12. Access app in browser:
+13. Access app in browser:
 
 - http://127.0.0.1:30030/telemetry/api/v1/swagger-ui.html	(API docs and test client)
 - http://127.0.0.1:30030/telemetry/api/v1/locations 		(simple json RPC response)
 - http://127.0.0.1:30030/telemetry/api/v1/hal/locations 	(hal+json response)
 			
 
-13. Delete K8s namespace (this should delete all resources within the namespace. PV is not bound to namespace.):
+14. Delete K8s namespace (this should delete all resources within the namespace. PV is not bound to namespace.):
 ```
 kubectl delete ns telemetry-dev
 kubectl delete pv mysql-pv
 
 ```
  
-14. Stop K8s cluster:
+15. Stop K8s cluster:
 ```
 sudo minikube stop
 ```
-15. Done!
+16. Done!
